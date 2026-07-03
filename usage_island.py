@@ -181,6 +181,9 @@ def collect():
 # ---------------------------------------------------------------------------
 def _run_gui():
     import rumps
+    # ponytail: sem ícone no Dock — vira "accessory" (só menu bar, roda em segundo plano).
+    from AppKit import NSApplication, NSApplicationActivationPolicyAccessory
+    NSApplication.sharedApplication().setActivationPolicy_(NSApplicationActivationPolicyAccessory)
 
     class UsageApp(rumps.App):
         def __init__(self):
