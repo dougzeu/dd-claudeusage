@@ -33,8 +33,10 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 PLIST
 cat > "$APP/Contents/MacOS/dd-claudeusage" <<LAUNCH
 #!/bin/sh
+# lança desanexado e sai na hora, senão o LaunchServices trava o bundle e o 2º open não abre
 /usr/bin/pgrep -f '[p]ython.*dd_claudeusage\.py' >/dev/null 2>&1 && exit 0
-exec "$SRC/.venv/bin/python" "$SRC/dd_claudeusage.py"
+nohup "$SRC/.venv/bin/python" "$SRC/dd_claudeusage.py" >/dev/null 2>&1 &
+exit 0
 LAUNCH
 chmod +x "$APP/Contents/MacOS/dd-claudeusage"
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP" 2>/dev/null || true
