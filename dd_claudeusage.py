@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""usage-island — menubar app (macOS) com usage do Claude Code: janela 5h + 7d.
+"""dd-claudeusage — menubar app (macOS) com usage do Claude Code: janela 5h + 7d.
 
 Inspirado no Pookify, mas na barra de menu e focado em USAGE.
 
@@ -10,8 +10,8 @@ Duas fontes, nesta ordem:
   2. ccusage (fallback) — custo/tokens locais de ~/.claude/projects, se o probe falhar.
 
 Uso:
-    python usage_island.py            # roda o app na barra de menu
-    python usage_island.py --check    # valida as duas fontes sem abrir GUI
+    python dd_claudeusage.py            # roda o app na barra de menu
+    python dd_claudeusage.py --check    # valida as duas fontes sem abrir GUI
 """
 import json
 import os
@@ -28,7 +28,7 @@ CLAUDE_MODEL = "claude-haiku-4-5-20251001"  # probe barato; max_tokens=1
 H_5H = "anthropic-ratelimit-unified-5h-utilization"
 H_7D = "anthropic-ratelimit-unified-7d-utilization"
 H_5H_RESET = "anthropic-ratelimit-unified-5h-reset"
-TOKEN_FILE = os.path.expanduser("~/usage-island/.token")
+TOKEN_FILE = os.path.expanduser("~/dd-claudeusage/.token")
 TOKENMETER_CONFIG = os.path.expanduser("~/Projects/nodemcu/tokenmeter/config.h")
 
 # --- Fonte 2: ccusage (fallback) — teto configurável, só usado sem token -----
@@ -72,7 +72,7 @@ def _fmt_tok(n):
 # Fonte 1: plano (oficial)
 # ---------------------------------------------------------------------------
 def _claude_token():
-    """Token OAuth do Claude Code. Env > ~/usage-island/.token > config.h do tokenmeter."""
+    """Token OAuth do Claude Code. Env > ~/dd-claudeusage/.token > config.h do tokenmeter."""
     t = os.environ.get("CLAUDE_CODE_TOKEN")
     if t:
         return t.strip()
