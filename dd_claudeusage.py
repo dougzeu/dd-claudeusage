@@ -214,7 +214,8 @@ def _run_gui():
 
         def _render_plan(self, d):
             p5h, p7d = d["p5h"], d["p7d"]
-            self.title = f"{ICON} {p5h if p5h is not None else '—'}·{p7d if p7d is not None else '—'}%"
+            pct = lambda v: f"{v}%" if v is not None else "—"
+            self.title = f"{ICON} {pct(p5h)} | {pct(p7d)}"
             self.head.title = "Plano (oficial · /usage)"
             reset = f"   reseta em {d['reset']}" if d["reset"] else ""
             self.l1.title = f"5h (atual):   {_bar(p5h or 0)}  {p5h if p5h is not None else '—'}%"
